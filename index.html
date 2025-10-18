@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Ebook: 100 usos de IA en Minecraft — Aprendé IA jugando</title>
+  <meta name="description" content="Aprendé IA dentro de Minecraft con 100 usos prácticos: construcción, supervivencia, redstone, granjas, servidores y creación de contenido. Más simple y divertido que estudiar IA por separado."/>
+
+  <style>
+    :root{
+      --bg:#0b1220; --bg-2:#0d1730; --card:#0f1b2d; --panel:#12233b;
+      --muted:#9db1d9; --text:#eaf1ff; --primary:#3b82f6; --accent:#2563eb;
+      --outline:#1b2a4a; --danger:#ef4444; --warning:#f59e0b;
+      --shadow:0 10px 25px rgba(0,0,0,.45); --radius:16px; --chip:#132643;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg) 0%, var(--bg-2) 100%);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial}
+    a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:0 auto;padding:0 20px;width:100%}
+    header{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:linear-gradient(180deg,#0f1c33, #0b1426);border-bottom:1px solid var(--outline)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+    .brand img{height:28px;width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(59,130,246,.35));}
+    .badge{font-size:12px;padding:4px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:var(--muted);background:rgba(255,255,255,.03)}
+    .nav a{padding:8px 12px;border-radius:10px;opacity:.95}.nav a:hover{background:rgba(59,130,246,.12);opacity:1}
+
+    .hero{padding:64px 0 24px}.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+    .h1{font-size:clamp(28px,4vw,46px);line-height:1.08;margin:0 0 12px}
+    .lead{color:var(--muted);font-size:clamp(16px,2.4vw,18px)}
+    .cta{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+    .btn{padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));color:var(--text);font-weight:800;cursor:pointer;transition:transform .05s ease, box-shadow .15s ease;box-shadow:0 6px 18px rgba(37,99,235,.15)}
+    .btn:hover{transform:translateY(-1px)} .btn.primary{background:linear-gradient(180deg,var(--primary), var(--accent));border-color:#2b5fcc;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.35)} .btn.ghost{background:transparent;border-color:rgba(59,130,246,.35)}
+    .panel{background:linear-gradient(180deg,var(--panel),var(--card));border:1px solid var(--outline);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card{background:var(--card);border:1px solid var(--outline);border-radius:var(--radius);box-shadow:var(--shadow)} .card.pad{padding:22px}
+    section{padding:48px 0}
+
+    .proofbar{margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .proofbar .chip{background:var(--chip);border:1px solid rgba(255,255,255,.10);padding:10px 12px;border-radius:12px;text-align:center;font-size:14px;color:var(--muted)}
+    .proofbar strong{color:#e8f0ff}
+
+    .illus{width:100%;aspect-ratio:4/3;border:1px dashed rgba(255,255,255,.14);border-radius:var(--radius);overflow:hidden;background:radial-gradient(1200px 400px at -10% -20%, rgba(59,130,246,.25), transparent)}
+    .illus img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+
+    .kicker{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    h2{margin:0 0 8px;font-size:clamp(22px,3.4vw,32px)} p{color:var(--muted);line-height:1.6}
+
+    .feature{display:grid;gap:8px;padding:16px}
+    .feature .icon{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(180deg,var(--primary),var(--accent));color:#fff;margin-bottom:6px}
+
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .step{padding:18px;border-radius:14px;border:1px dashed rgba(255,255,255,.18);background:rgba(255,255,255,.03)}
+    .step .num{font-weight:900;color:#9ec4ff;font-size:14px;letter-spacing:1px}
+
+    .guarantee{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}
+    .guarantee .seal{display:grid;place-items:center;padding:24px}
+    .seal-badge{width:120px;height:120px;border-radius:999px;border:3px solid var(--primary);display:grid;place-items:center;font-weight:900;color:#9ec4ff;text-align:center;line-height:1.1;background:radial-gradient(100px 60px at 50% 40%, rgba(59,130,246,.2), transparent)}
+
+    .list{margin:12px 0 0 0;padding:0;list-style:none}
+    .list li{margin-bottom:8px;display:flex;gap:10px;align-items:center}
+    .check{width:18px;height:18px;border-radius:4px;background:var(--primary);display:inline-block;flex:none}
+
+    .pricing{display:grid;grid-template-columns:1fr;gap:18px}
+    .price-card{padding:22px;border-radius:var(--radius);border:1px solid var(--outline);background:linear-gradient(180deg,rgba(59,130,246,.12),rgba(255,255,255,.02));position:relative;overflow:hidden}
+    .price-title{font-weight:800;font-size:18px;display:flex;align-items:center;gap:8px}
+    .price{font-size:34px;font-weight:900;margin:8px 0 6px;color:#eaf1ff}
+    .small{font-size:12px;color:var(--muted)}
+
+    .faq{display:grid;gap:10px}
+    .faq details{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px 16px}
+    .faq summary{cursor:pointer;font-weight:700}
+
+    footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.12);color:var(--muted);background:#0b1426}
+    .footgrid{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}
+    .footlinks a{margin-left:14px;color:var(--muted)}
+
+    .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .testimonial .shot{width:100%;height:auto;max-height:140px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.15);margin-top:10px}
+    .testimonial p{font-size:.95rem}
+
+    .rainbow-underline{position:relative;display:inline-block}
+    .rainbow-underline::after{content:"";position:absolute;left:0;right:0;bottom:-.12em;height:.16em;background:linear-gradient(90deg,#3b82f6,#60a5fa,#93c5fd,#60a5fa,#3b82f6);background-size:300% 100%;animation:cc-rainbow 3.2s linear infinite;border-radius:2px;box-shadow:0 1px 6px rgba(37,99,235,.35)}
+    @keyframes cc-rainbow{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+
+    @media (max-width: 900px){
+      .hero .wrap{grid-template-columns:1fr}
+      .grid-5{grid-template-columns:repeat(2,1fr)}
+      .pricing{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img src="https://i.imgur.com/AksrwdH.png"
+             alt="eqstore logo"
+             width="95"
+             style="height:auto; vertical-align:middle; max-height:48px;"
+             referrerpolicy="no-referrer"
+             decoding="async"
+             fetchpriority="high">
+        <span>EQSTORE</span>
+        <span class="badge">Minecraft + IA</span>
+      </div>
+      <nav>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#garantia">Garantía</a>
+        <a href="#precios">Precio</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container wrap">
+        <div>
+          <h1 class="h1">Ebook “100 usos de IA en Minecraft”</h1>
+          <p class="lead"><strong>Aprendé IA con Minecraft</strong>: diseñé este ebook para que los jugadores aprendan IA <em>dentro del juego</em>, con retos y ejemplos prácticos. Aprender por fuera del juego es más pesado; acá lo hacés jugando.</p>
+          <div class="cta">
+            <a class="btn primary" href="https://eqstore.craftingstore.net/login/package/1458540">Obtener ebook — US$ 4,90</a>
+            <a class="btn ghost" href="#como-funciona">Ver cómo funciona</a>
+          </div>
+          <div class="proofbar">
+            <div class="chip"><strong>Aprendé IA jugando</strong></div>
+            <div class="chip">Para <strong>jugadores</strong> de Minecraft</div>
+            <div class="chip">Actualizaciones <strong>de por vida</strong></div>
+            <div class="chip"><strong>Soporte</strong> por Discord</div>
+          </div>
+        </div>
+        <div class="illus panel">
+          <img src="https://imgur.com/SpDHDRt.png" alt="Portada del ebook 100 usos de IA en Minecraft" fetchpriority="high" decoding="async"/>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUÉ TE LLEVÁS (5 pilares) -->
+    <section id="que-llevas">
+      <div class="container">
+        <div class="kicker">Incluye</div>
+        <h2>Lo que te llevás</h2>
+        <div class="grid-5">
+          <div class="card pad feature"><div class="icon">🎯</div><strong>100 usos accionables</strong><p>Construcción, supervivencia, redstone, granjas, servidores y creación de contenido.</p></div>
+          <div class="card pad feature"><div class="icon">🧩</div><strong>Retos in‑game</strong><p>Aprendé conceptos de IA aplicándolos a misiones dentro del mundo.</p></div>
+          <div class="card pad feature"><div class="icon">📚</div><strong>Rutas de aprendizaje</strong><p>Módulos por nivel: básico → intermedio → avanzado, pensados para jugadores.</p></div>
+          <div class="card pad feature"><div class="icon">🛠️</div><strong>Plantillas neutrales</strong><p>Prompts genéricos que funcionan con el chatbot/IA que prefieras.</p></div>
+          <div class="card pad feature"><div class="icon">♻️</div><strong>Actualizaciones de por vida</strong><p>Recibís nuevas ideas y mejoras sin costo extra.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section id="como-funciona">
+      <div class="container">
+        <div class="kicker">Onboarding</div>
+        <h2>Cómo funciona</h2>
+        <div class="steps">
+          <div class="step"><div class="num">01</div><strong>Recibe</strong><p>Descarga inmediata del PDF.</p></div>
+          <div class="step"><div class="num">02</div><strong>Entrá a tu mundo</strong><p>Aplicá cada uso como un mini‑desafío dentro del juego.</p></div>
+          <div class="step"><div class="num">03</div><strong>Aprendé IA jugando</strong><p>Mejorá tu juego y tu comprensión de IA al mismo tiempo.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GARANTÍA -->
+    <section id="garantia">
+      <div class="container guarantee">
+        <div>
+          <div class="kicker">Para tu tranquilidad</div>
+          <h2>Garantía y soporte</h2>
+          <ul class="list">
+            <li><span class="check"></span><div>Descarga inmediata + actualizaciones de por vida.</div></li>
+            <li><span class="check"></span><div>Soporte en <a href="https://discord.gg/dyzrWnjmsJ">Discord</a> con ayuda semanal.</div></li>
+            <li><span class="check"></span><div>Hecho por jugadores, para jugadores.</div></li>
+          </ul>
+          <div class="cta">
+            <a class="btn primary" href="https://eqstore.craftingstore.net/login/package/1458540">Comprar el ebook</a>
+            <a class="btn ghost" href="#faq">Leer preguntas frecuentes</a>
+          </div>
+        </div>
+        <div class="seal">
+          <div class="seal-badge"><div>Listo<br>para usar</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRECIO -->
+    <section id="precios">
+      <div class="container">
+        <h2>Precio</h2>
+        <div class="pricing">
+          <div class="price-card">
+            <div class="price-title">Ebook “100 usos de IA en Minecraft”</div>
+            <div class="price">US$ 4,90 USD</div>
+            <div class="small">PDF + futuras actualizaciones incluidas.</div>
+            <ul class="list" style="margin-top:10px">
+              <li><span class="check"></span><div>100 usos listos para copiar y aplicar.</div></li>
+              <li><span class="check"></span><div>Rutas por niveles y modos de juego.</div></li>
+              <li><span class="check"></span><div>Soporte por Discord.</div></li>
+            </ul>
+            <div class="cta" style="margin-top:12px">
+              <a class="btn primary" href="https://eqstore.craftingstore.net/login/package/1458540">Obtener ahora</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS (opcionales) -->
+    <div class="grid-3 testimonials-grid" style="padding:0 20px">
+      <div class="card pad testimonial">
+        <strong>Lu</strong> <span class="small">Builder</span>
+        <p>“Los retos in‑game me hicieron entender IA mientras construía. Cero aburrimiento.”</p>
+        <img src="https://imgur.com/SpDHDRt.png" alt="Testimonio 1" class="shot" loading="lazy"/>
+      </div>
+      <div class="card pad testimonial">
+        <strong>Marcos</strong> <span class="small">Survival</span>
+        <p>“Siento que aprendo algo nuevo de IA cada vez que entro a mi mundo.”</p>
+        <img src="https://imgur.com/Rju3Fbf.png" alt="Testimonio 2" class="shot" loading="lazy"/>
+      </div>
+      <div class="card pad testimonial">
+        <strong>Ana</strong> <span class="small">Creadora</span>
+        <p>“Me dio 10 ideas para Shorts y encima entendí mejores prompts.”</p>
+        <img src="https://imgur.com/VjoitfJ.png" alt="Testimonio 3" class="shot" loading="lazy"/>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <div class="kicker">FAQ</div>
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details>
+            <summary>¿En qué formato viene?</summary>
+            <p>PDF descargable. Lo podés leer en cualquier dispositivo.</p>
+          </details>
+          <details>
+            <summary>¿Necesito herramientas extra?</summary>
+            <p>No. Los usos están pensados para aplicarse en tu mundo Minecraft y con el chatbot/IA que prefieras.</p>
+          </details>
+          <details>
+            <summary>¿Se actualiza?</summary>
+            <p>Sí. Recibís actualizaciones de por vida y avisamos por Discord cuando hay nuevos usos.</p>
+          </details>
+          <details>
+            <summary>¿Para quién es?</summary>
+            <p>Para jugadores de Minecraft que quieren aprender IA jugando, no estudiando aparte.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footgrid">
+      <div>© 2025 EQSTORE — Hecho por y para la comunidad de Minecraft. <span class="badge">Aprender IA jugando</span>.</div>
+      <div class="footlinks">
+        <a href="#garantia">Garantía</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://eqstore.craftingstore.net/login/package/1458540">Comprar</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Exit-intent Modal -->
+  <div class="modal hidden" id="exitModal" aria-hidden="true" style="display:none;">
+    <div class="backdrop" data-close="1" style="position:fixed;inset:0;background:rgba(0,0,0,.6)"></div>
+    <div class="content" style="position:relative;max-width:560px;width:92%;background:var(--card);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:0 16px;">
+      <h3 style="margin:0 0 8px;font-size:22px;">¿Te vas sin tu ebook?</h3>
+      <p>Aprendé IA con Minecraft: 100 usos listos para aplicar en tu mundo.</p>
+      <p class="small">Actualizaciones de por vida + soporte por Discord.</p>
+      <div class="actions" style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a class="btn primary" href="https://eqstore.craftingstore.net/login/package/1458540">Quiero el ebook</a>
+        <button class="btn ghost" id="exitClose">Seguir mirando</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    document.addEventListener('click', function(e){
+      const a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+      const target = document.querySelector(a.getAttribute('href'));
+      if(!target) return;
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+      history.pushState(null,'',a.getAttribute('href'));
+    }, {passive:false});
+
+    (function(){
+      const modal = document.getElementById('exitModal');
+      if(!modal) return;
+      const CLOSE = ['#exitClose','.backdrop'];
+      let shown = localStorage.getItem('cc_exit_shown') === '1';
+      function show(){ if(shown) return; shown = true; localStorage.setItem('cc_exit_shown','1'); modal.style.display='flex'; modal.classList.remove('hidden'); modal.setAttribute('aria-hidden','false'); }
+      function hide(){ modal.classList.add('hidden'); modal.setAttribute('aria-hidden','true'); modal.style.display='none'; }
+      CLOSE.forEach(sel=>{ const el = modal.querySelector(sel); if(el) el.addEventListener('click', hide); });
+      document.addEventListener('mouseout', (e)=>{ const from = e.relatedTarget || e.toElement; if((!from || from.nodeName==='HTML') && e.clientY<=0) show(); });
+      document.addEventListener('mouseleave', (e)=>{ if(e.clientY<=0) show(); });
+    })();
+  </script>
+
+  <!-- Legal -->
+  <footer id="legal" style="padding:1.5rem 1rem;border-top:1px solid #23304f;color:#dbe8ff;background:#0a1120">
+    <p style="max-width:75ch;margin:0 auto">
+      <strong>Disclaimer:</strong> Este producto no está afiliado, asociado, autorizado, respaldado ni patrocinado por Mojang/Microsoft. Todas las marcas pertenecen a sus respectivos dueños.
+    </p>
+  </footer>
+</body>
+</html>
